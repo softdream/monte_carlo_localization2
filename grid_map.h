@@ -21,7 +21,7 @@ public:
 	const Eigen::Vector2i getIdx( const float &x, const float &y );
 
 	const float getGridBel( const float &x, const float &y );
-	const float getGridBelInt( const int i, const int j );			
+	const float getGridBelInt( const int i, const int j ) const;			
 
 	void setGridBel( const float &x, const float &y, const float bel );
 	

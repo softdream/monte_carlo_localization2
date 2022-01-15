@@ -41,7 +41,7 @@ bool GridMap::loadMap( const std::string &file_path )
 				point_number ++;
 				bel_data_(x, y) = 1.0;
 			}
-			else if( pixel == 255 ){
+			else if( pixel == 255 ){// free
 				bel_data_(x, y) = 0.0;
 			}
 			else {
@@ -91,7 +91,7 @@ const float GridMap::getGridBel( const float &x, const float &y )
 	return bel_data_( idx(0), idx(1) );
 }
 
-const float GridMap::getGridBelInt( const int i, const int j )
+const float GridMap::getGridBelInt( const int i, const int j ) const
 {
 	return bel_data_( i, j );
 }
