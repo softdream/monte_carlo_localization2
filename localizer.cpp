@@ -291,9 +291,16 @@ void Localizer::displayMapWithScan( const Pose2d &pose, const sensor::LaserScan 
 		}
 	
 		float angle = angle_inc * i + angle_min;
-		Pose2d p_l( r * cos( angle ), r * sin( angle ) );
-		Eigen::Vector2f p_w = pose * p_l;
-
+		Eigen::Vector2f p_l( r * cos( angle ), r * sin( angle ) );	
+	
+		Eigen::Matrix2f R;
+		R << cos(pose.theta_), -sin(pose.theta_),
+		     sin(pose.theta_), cos(pose.theta_);
+		
+		Eigen::Vector2f T( pose.x_, pose.y_ );
+		
+		Eigen::Vector2f p_w = R * p_l + T;
+		
 		cv::circle(image, cv::Point2f( p_w[0] * 10 , p_w[1] * 10 ), 2, cv::Scalar(255, 0, 0), -1);
 	}
 

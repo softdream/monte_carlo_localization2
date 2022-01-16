@@ -44,6 +44,32 @@ int main()
 	Localizer *localizer = new Localizer( robot, grid_map, motion_model, measurement_model, particles );
 	localizer->displayMap();
 
+	// ------------- 6. init the simulation file ------------ //
+	simulate::DataRead data_read( "./laser_data.txt" );
+
+	int count = 0;
+	while( count < 1 ){
+		sensor::LaserScan scan;	
+		scan.angle_min = -3.124139071f;
+		scan.angle_max = 3.141592741f;
+		scan.angle_increment = 0.0174532924f;
+		scan.range_min = 0.15f;	
+		scan.range_max = 12.0f;
+	
+		Pose2d odom( 0.0f, 0.0f, 0.0f );
+		int type = data_read.readAFrameData( scan, odom );
+		if( type == 1 ){
+			
+		}	
+		else if( type == 2 ){
+
+		}
+	
+		localizer->displayMapWithScan( odom, scan );
+	}
+
 	cv::waitKey( 0 );
+	
+	data_read.closeSimulationFile();
 	return 0;
 }
